@@ -4,4 +4,3 @@
 <p>
 A criação do projeto Spring Boot foi feita através do site <a href="https://start.spring.io/">Spring Initializr</a>, em que podem ser feitas várias configurações facilmente, incluindo a adição de dependências no projeto.
 </p>
-![Captura de tela de 2022-08-13 19-52-36](https://user-images.githubusercontent.com/75228333/184516041-db3f586b-36a9-4292-9942-cd9ca904e713.png)
