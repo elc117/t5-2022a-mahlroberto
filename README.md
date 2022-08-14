@@ -28,5 +28,15 @@ Uma vez descompactado, o projeto foi importado na IDE IntelliJ IDEA, por onde fo
 </ul>
 <img src="/screenshots/topicosController1.png"/>
 <h4>Usando Spring Data</h4>
-
+<p>
+  A fim de tornar o código mais dinâmico com um banco de dados e tomar proveito das facilidades disponibilizadas pelo Spring Data, algumas modificações foram feitas no projeto. O banco de dados escolhido para esse objetivo foi o  H2, que é um banco de dados em memória e possui implantação simples. Sendo assim, duas dependências adicionais foram adicionadas ao arquivo pom.xml, uma que diz respeito ao JPA, e outra referente ao banco de dados H2. Além disso, algumas configurações adicionais do banco de dados foram feitas no arquivo application.properties.
+</p>
+<p>
+  Feitas as modificações, o primeiro passo para a utilização do banco de dados foi a criação da classe TopicoRepository, relativa à persistência de dados dos tópicos. Ela extende a interface JpaRepository, que já possui muitos métodos úteis para a manipulação de uma base de dados. Além disso, a criação de uma nova busca foi uma tarefa muito simples, já que estas podem ser implementadas automaticamente pelo Spring Data através da nomenclatura de métodos na interface seguindo determinado padrões. 
+</p>
+<img src="/screenshots/topicoRepository.png"/>
+<p>
+  Para utilizar esta nova interface no controller, ela foi declarada como um atributo da classe, anotado com @Autowired. Assim, o novo método de busca pode ser chamado sempre que uma requisição é feita para o endpoint.
+</p>
+<img src="/screenshots/topicosController2.png"/>
 
