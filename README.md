@@ -23,7 +23,10 @@ Uma vez descompactado, o projeto foi importado na IDE IntelliJ IDEA, por onde fo
    Em seguida, iniciou-se o desenvolvimento de novos endpoints para a aplicação. Os primeiros foram referentes a Tópicos e, portanto, ficam localizados na nova classe chamada TopicosController. Essa classe se diferencia da primeira classe criada em alguns pontos:
 </p>
 <ul>
-  <li>É anotada com @RestController ao invés de @Controller. Assim, ela permite não usar a anotação @ResponseBody em cada um de seus endpoints para indicar que o retorno não é uma referência a uma página.</li>
+  <li>É anotada com @RestController ao invés de @Controller. Assim, ela permite não se use a anotação @ResponseBody em cada um de seus endpoints para indicar que o retorno não é uma referência a uma página.</li>
   <li>Acarretou na criação de uma classe e um respectivo pacote novos para DTOs (Data Transfer Objects). Esses objetos possuem apenas os dados que se deseja retornar no resultado de uma chamada ao endpoint, sem que haja a transmissão de atributos extra desnecessários.</li>
 </ul>
 <img src="/screenshots/topicosController1.png"/>
+<h4>Usando Spring Data</h4>
+
+
