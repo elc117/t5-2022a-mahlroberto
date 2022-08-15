@@ -23,7 +23,7 @@ Uma vez descompactado, o projeto foi importado na IDE IntelliJ IDEA, por onde fo
    Em seguida, iniciou-se o desenvolvimento de novos endpoints para a aplicação. Os primeiros foram referentes a Tópicos e, portanto, ficam localizados na nova classe chamada TopicosController. Essa classe se diferencia da primeira classe criada em alguns pontos:
 </p>
 <ul>
-  <li>É anotada com @RestController ao invés de @Controller. Assim, ela permite não se use a anotação @ResponseBody em cada um de seus endpoints para indicar que o retorno não é uma referência a uma página.</li>
+  <li>É anotada com @RestController ao invés de @Controller. Assim, ela permite que não se use a anotação @ResponseBody em cada um de seus endpoints para indicar que o retorno não é uma referência a uma página.</li>
   <li>Acarretou na criação de uma classe e um respectivo pacote novos para DTOs (Data Transfer Objects). Esses objetos possuem apenas os dados que se deseja retornar no resultado de uma chamada ao endpoint, sem que haja a transmissão de atributos extra desnecessários.</li>
 </ul>
 <img src="/screenshots/topicosController1.png"/>
@@ -59,3 +59,22 @@ Até o momento, nenhuma verificação de consistência dos dados passados era fe
   Para evitar, ainda, que a API retorne erros excessivamente grandes e de difícil compreensão, foi criada uma classe que intercepta o tipo de exceção jogada pela validação, chamada ErroDeValidacaoHandler. Ela deve montar um conjunto de dados sucinto para retornar como reposta à requisição, como pode ser visto na imagem abaixo.
 </p>
 <img src="/screenshots/erroDeValidacaoHandler.png"/>
+<h4>Métodos PUT, DELETE, e tratamento de erro</h4>
+<p>
+  Avançando com o desenvolvimento da API, partiu-se para a definição de alguns outros métodos importantes. 
+</p>
+<p>
+  O método detalha objetiva o recebimento de requisições que devem retornar mais informações sobre tópicos do que o método lista. Como é o segundo método GET da API, o endereço do endpoint teve de ser especificado para que não houvesse conflitos. Sendo assim, o método é requisitado através de "/topicos/{id}", sendo que "{id}" assume o id do tópico cujas informações estão sendo buscadas.
+</p>
+<img src="/screenshots/detalha.png"/>
+<p>
+  Já o método atualiza é o responsável por receber requisições PUT, no mesmo endereço de detalha: "/topicos/{id}". Como parâmetro do corpo da requisição, devem ser mandados, ainda, os atributos que compõem a nova classe AtualizacaoTopicoForm, que são titulo e mensagem. Feito isso, o código fica extremamente simples, bastando então setar os novos campos na entidade gerenciada pela JPA.
+</p>
+<img src="/screenshots/atualiza.png"/>
+<p>
+  Por fim, o método remove faz a exclusão de tópicos do banco de dados. Seu único parâmetro é o id do tópico a se excluir, e o método que performa a exclusão de fato é o deleteById, já implementado pelo framework.
+</p>
+<img src="/screenshots/remove.png"/>
+<p>
+  Ademais, foram adicionadas algumas validações de existência de id nos métodos, para que em caso de falha, o retorno da requisição não seja uma exceção sem tratamento nenhum.
+</p>
