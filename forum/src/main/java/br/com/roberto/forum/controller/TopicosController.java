@@ -34,10 +34,11 @@ public class TopicosController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicoDto> cadastra(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<TopicoDto> cadastra(@RequestBody TopicoForm form, /* Desta vez, o conteúdo não vem pela URL */
+                                              UriComponentsBuilder uriBuilder /* Injetado pelo Spring Boot */) {
         Topico topico = topicoRepository.save(form.converter(cursoRepository));
 
-        /* Boas práticas do REST, retornar código 201 quando um recurso é criado com sucesso,
+        /* Boas práticas do REST: retornar código 201 quando um recurso é criado com sucesso,
         contendo a localização dele e uma representação no corpo do retorno */
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicoDto(topico));
