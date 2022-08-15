@@ -3,11 +3,19 @@ package br.com.roberto.forum.controller.form;
 import br.com.roberto.forum.modelo.Curso;
 import br.com.roberto.forum.modelo.Topico;
 import br.com.roberto.forum.repository.CursoRepository;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class TopicoForm {
 
+    @NotNull
+    @NotEmpty
     private String titulo;
+    @NotNull
+    @NotEmpty
     private String mensagem;
+    @NotNull
+    @NotEmpty
     private String nomeCurso;
     private Long idUsuario;
 

@@ -7,6 +7,7 @@ import br.com.roberto.forum.repository.CursoRepository;
 import br.com.roberto.forum.repository.TopicoRepository;
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,10 @@ public class TopicosController {
         return TopicoDto.converter(topicos);
     }
 
+    /* @RequestBody indica que desta vez o conteúdo não vem pela URL */
+    /* @Valid faz com que as anotações de validação nos atributos da classe sejam checadas efetivamente para o parâmetro */
     @PostMapping
-    public ResponseEntity<TopicoDto> cadastra(@RequestBody TopicoForm form, /* Desta vez, o conteúdo não vem pela URL */
+    public ResponseEntity<TopicoDto> cadastra(@RequestBody @Valid TopicoForm form,
                                               UriComponentsBuilder uriBuilder /* Injetado pelo Spring Boot */) {
         Topico topico = topicoRepository.save(form.converter(cursoRepository));
 
