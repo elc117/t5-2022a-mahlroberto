@@ -50,3 +50,12 @@ Uma vez descompactado, o projeto foi importado na IDE IntelliJ IDEA, por onde fo
   A persistência no banco de dados em memória é feita através do método save da própria interface JpaRepository, que salva o resultado do método de conversão em Topico criado dentro da classe TopicoForm.
 </p>
 <img src="/screenshots/topicosController3.png"/>
+<h4>Validações com Bean Validation</h4>
+<p>
+Até o momento, nenhuma verificação de consistência dos dados passados era feita para as requisições. Para tratar desta falta e evitar que as validações sejam feitas através de numerosos ifs/elses, foi utilizado o Bean Validation. Através dele, pode-se apenas adicionar anotações em atributos de classe informando as validações necessárias. Para que a validação seja efetivamente ativada, basta adicionar uma anotação de @Valid no parâmetro do endpoint. Assim, todas as outras anotações farão as verificações que implicam.
+</p>
+<img src="/screenshots/topicoForm.png"/>
+<p>
+  Para evitar, ainda, que a API retorne erros excessivamente grandes e de difícil compreensão, foi criada uma classe que intercepta o tipo de exceção jogada pela validação, chamada ErroDeValidacaoHandler. Ela deve montar um conjunto de dados sucinto para retornar como reposta à requisição, como pode ser visto na imagem abaixo.
+</p>
+<img src="/screenshots/erroDeValidacaoHandler.png"/>
