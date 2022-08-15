@@ -1,25 +1,23 @@
 package br.com.roberto.forum.controller;
 
+import br.com.roberto.forum.controller.dto.DetalhesDoTopicoDto;
 import br.com.roberto.forum.controller.dto.TopicoDto;
 import br.com.roberto.forum.controller.form.TopicoForm;
 import br.com.roberto.forum.modelo.Topico;
 import br.com.roberto.forum.repository.CursoRepository;
 import br.com.roberto.forum.repository.TopicoRepository;
-import java.net.URI;
-import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
 
 /* Substitui @Controller e permite que se deixe de usar a anotação @ResponseBody em cada um de seus endpoints */
 @RestController
-@RequestMapping("/topicos") /* Implica que todos os métodos nessa classe começarão com este mapeamento */
+@RequestMapping(name = "/topicos") /* Implica que todos os métodos nessa classe começarão com este mapeamento */
 public class TopicosController {
 
     @Autowired /* Injeta/insere uma implementação da interface na declaração. Faz com que não seja necessário instanciar manualmente através de um método construtor */
@@ -45,6 +43,14 @@ public class TopicosController {
         contendo a localização dele e uma representação no corpo do retorno */
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicoDto(topico));
+    }
+
+    /* @GetMapping aqui deve indicar o caminho do endpoint, porque se isso não for feito, será o mesmo caminho do método lista */
+    /* @PathVariable indica que o parâmetro vem na URL, e não como parâmetro no formato ?id=x */
+    @GetMapping(name = "/{id}")
+    public DetalhesDoTopicoDto detalha(@PathVariable Long id) {
+        Topico topico = topicoRepository.getReferenceById(id);
+        return new DetalhesDoTopicoDto(topico);
     }
 
 }
