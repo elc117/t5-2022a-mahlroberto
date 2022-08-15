@@ -39,4 +39,14 @@ Uma vez descompactado, o projeto foi importado na IDE IntelliJ IDEA, por onde fo
   Para utilizar esta nova interface no controller, ela foi declarada como um atributo da classe, anotado com @Autowired. Assim, o novo método de busca pode ser chamado sempre que uma requisição é feita para o endpoint.
 </p>
 <img src="/screenshots/topicosController2.png"/>
-
+<h4>Cadastrando Tópicos</h4>
+<p>
+  Para avançar com a API, é necessário incluir endpoints que façam mais do que apenas retornar informações. Então, a criação de tópicos foi desenvolvida na classe TopicosController. Mais uma vez algumas mudanças gerais aconteceram na classe, como por exemplo a transição da anotação @RequestMapping do método para a classe e a adição de anotações referentes ao métodos HTTP de cada endpoint. 
+</p>
+<p>
+  A maior modificação, entretanto, foi por conta da criação do método cadastra, que é o responsável pelo recebimento de POSTs contendo dados a serem criados. Esses dados virão dentro de uma nova classe auxiliar, a TopicoForm, que é muito similar à classe TopicoDto, já existente mas diferente pela presença/ausência de alguns atributos.
+</p>
+<p>
+  A persistência no banco de dados em memória é feita através do método save da própria interface JpaRepository, que salva o resultado do método de conversão em Topico criado dentro da classe TopicoForm.
+</p>
+<img src="/screenshots/topicosController3.png"/>
